@@ -6,14 +6,14 @@ function App() {
   
   const getData = async () => {
     const res = await axios.get('https://backendmongodeploy.onrender.com/getData')
-    console.log(res)
-    setData(res)
+    console.log(res.data)
+    setData(res.data)
   }
 
   useEffect(() => {
     getData()
   }, [])
-  
+
   return (
     <div>
       <h1>{data}</h1>
