@@ -1,15 +1,28 @@
 import { useState } from "react"
-// const res = await axios.get('https://backendmongodeploy.onrender.com/getData')
+import { products } from "./products/products"
 
 function App() {
-  const [content, setContent] = useState('');
+  const [nombre, setNombre] = useState('')
+  const [direccion, setDireccion] = useState('')
+  const [telefono, setTelefono] = useState('')
 
+  let mensaje = '\n'
+  products.map(prod => {
+    let nombre = prod.nombre
+    let precio = prod.precio
+    let cantidad = prod.cantidad
+    let tamaño = prod.tamaño
+    mensaje += `\n- Una ${nombre} a un precio de ${precio}.\nLa cantidad es ${cantidad} y el tamaño es ${tamaño}.\n`
+  })
+  
   const sendWhatsAppMessage = () => {
     try {
-      console.log(content)
-      const whatsappLink = `https://api.whatsapp.com/send?phone=+5491162964493&text=${encodeURIComponent(content)}`;
+      const phone = '+5491162964493'
+      const message = `Hola! ${nombre} acaba de realizar un pedido desde la pagina web.\nSu direccion es ${direccion} y el telefono es ${telefono}.\n${nombre} hizo un pedido de:${mensaje}`
+  
+      const whatsappLink = `whatsapp://send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(message)}`;
       window.open(whatsappLink, '_blank');
-      setContent('')
+
     } catch (error) {
       console.log(error)
     }
@@ -17,12 +30,23 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Enviar Mensaje por WhatsApp</h1>
-      <br />
-      <label>Contenido del Mensaje:</label>
-      <textarea value={content} onChange={(e) => setContent(e.target.value)}></textarea>
-      <br />
-      <button onClick={sendWhatsAppMessage}>Enviar por WhatsApp</button>
+      <form>
+        <h1>Enviar Mensaje por WhatsApp</h1>
+        <div>
+          <label htmlFor="">Nombre</label>
+          <input onChange={(e) => setNombre(e.target.value)} type="text" required/>
+        </div>
+        <div>
+          <label htmlFor="">Direccion</label>
+          <input onChange={(e) => setDireccion(e.target.value)} type="text" required/>
+        </div>
+        <div>
+          <label htmlFor="">Telefono</label>
+          <input onChange={(e) => setTelefono(e.target.value)} type="number" required/>
+        </div>
+        <p>Acordate que si estas en una computadora debes abrir tu aplicacion de whatsapp antes de realizar la compra!</p>
+        <button onClick={sendWhatsAppMessage}>Enviar por WhatsApp</button>
+      </form>
     </div>
   )
 }
