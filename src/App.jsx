@@ -7,7 +7,7 @@ function App() {
   const sendWhatsAppMessage = () => {
     try {
       console.log(content)
-      const whatsappLink = `whatsapp://send?phone=+54-9-11-6296-4493&text=${encodeURIComponent(content)}`;
+      const whatsappLink = `https://api.whatsapp.com/send?phone=+54-9-11-6296-4493&text=${encodeURIComponent(content)}`;
       window.open(whatsappLink, '_blank');
     } catch (error) {
       console.log(error)
