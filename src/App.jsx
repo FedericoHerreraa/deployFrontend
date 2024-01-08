@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react"
-import axios from 'axios'
+import { useState } from "react"
+// const res = await axios.get('https://backendmongodeploy.onrender.com/getData')
 
 function App() {
-  const [data, setData] = useState('')
-  
-  const getData = async () => {
-    const res = await axios.get('https://backendmongodeploy.onrender.com/getData')
-    console.log(res.data)
-    setData(res.data)
+  const [content, setContent] = useState('');
+
+  const sendWhatsAppMessage = () => {
+    try {
+      console.log(content)
+      const whatsappLink = `whatsapp://send?phone=+54-9-11-6296-4493&text=${encodeURIComponent(content)}`;
+      window.open(whatsappLink, '_blank');
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  useEffect(() => {
-    getData()
-  }, [])
-
   return (
-    <div>
-      <h1>{data}</h1>
+    <div className="App">
+      <h1>Enviar Mensaje por WhatsApp</h1>
+      <br />
+      <label>Contenido del Mensaje:</label>
+      <textarea value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+      <br />
+      <button onClick={sendWhatsAppMessage}>Enviar por WhatsApp</button>
     </div>
   )
 }
