@@ -8,18 +8,17 @@ import Whatsapp from './components/whatsapp'
 
 function App() {
     return (
-        <Whatsapp/>
-      // <TaskProvider>
-      //   <BrowserRouter>
-      //     <NavBar/>
-      //     <Routes>
-      //       <Route path='/' element={<Home/>}/>
-      //       <Route path='/tasks' element={<Tasks/>}/>
-      //       <Route path='/add-task' element={<AddTask/>}/>
-      //       <Route path='/update-task/:id' element={<AddTask/>}/>
-      //     </Routes>
-      //   </BrowserRouter>
-      // </TaskProvider>
+      <TaskProvider>
+        <BrowserRouter>
+          <NavBar/>
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/tasks' element={<Tasks/>}/>
+            <Route path='/add-task' element={<AddTask/>}/>
+            <Route path='/update-task/:id' element={<AddTask/>}/>
+          </Routes>
+        </BrowserRouter>
+      </TaskProvider>
     )
 }
 

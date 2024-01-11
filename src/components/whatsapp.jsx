@@ -3,8 +3,8 @@ import { products } from "../products/products"
 
 const Whatsapp = () => {
     const [nombre, setNombre] = useState('')
-      const [direccion, setDireccion] = useState('')
-      const [telefono, setTelefono] = useState('')
+    const [direccion, setDireccion] = useState('')
+    const [telefono, setTelefono] = useState('')
     
       let mensaje = '\n'
       products.map(prod => {
